@@ -1,7 +1,7 @@
 name: Deployment Exercise 2
 on: push
-jobs:
-  lint:
+jobs: # Define jobs for the workflow
+  lint: # Job for linting the code
     runs-on: ubuntu-latest
     steps: 
       - name: Get code
@@ -10,7 +10,8 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-  test:
+  test: # Job for testing the code
+    # This job depends on the lint job
     needs: lint
     runs-on: ubuntu-latest
     steps: 
@@ -20,7 +21,8 @@ jobs:
         run: npm ci
       - name: Test code
         run: npm run test
-  deploy:
+  deploy: # Job for deploying the code
+    # This job depends on the test job  
     needs: test
     runs-on: ubuntu-latest
     steps:
